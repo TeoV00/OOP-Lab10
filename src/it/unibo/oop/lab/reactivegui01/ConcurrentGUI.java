@@ -65,6 +65,7 @@ public final class ConcurrentGUI extends JFrame {
     /*
      * The counter agent is implemented as a nested class. This makes it
      * invisible outside and encapsulated.
+            while (!this.stop) {
      */
     private class Agent implements Runnable {
         /*
