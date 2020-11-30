@@ -1,6 +1,6 @@
 package it.unibo.oop.lab.reactivegui02;
-import java.awt.Dimension;
 
+import java.awt.Dimension;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,15 +22,18 @@ public class ConcurrentGUI extends JFrame{
     private final JLabel countLabel = new JLabel();
 
     public ConcurrentGUI() {
+        super();
         final Dimension screenDim = Toolkit.getDefaultToolkit().getScreenSize();
-        final JFrame frame = new JFrame("Counter");
-        frame.setSize((int) (screenDim.getWidth() * WIDTH_PERC), (int) (screenDim.getHeight() * HEIGHT_PERC));
         final JPanel panel = new JPanel();
+        this.setSize((int) (screenDim.getWidth() * WIDTH_PERC), (int) (screenDim.getHeight() * HEIGHT_PERC));
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         panel.add(countLabel);
         panel.add(downButton);
         panel.add(upButton);
         panel.add(stopBtn);
-        frame.setVisible(true);
+        this.getContentPane().add(panel);
+        this.setVisible(true);
     }
 
 }
