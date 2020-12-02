@@ -57,7 +57,7 @@ public class AnotherConcurrentGUI extends JFrame {
         public void run() {
             long startTime = System.currentTimeMillis();
             long oldTime;
-            for (int time = 0; time < 10;) {
+            for (int time = 0; time < 10 && !stop;) {
                 oldTime = System.currentTimeMillis();
                 if (oldTime - startTime >= 1000) {
                     time++;
@@ -67,9 +67,7 @@ public class AnotherConcurrentGUI extends JFrame {
             }
             System.out.println("10 second expired");
             AnotherConcurrentGUI.this.stop = true;
-            AnotherConcurrentGUI.this.stopBtn.setEnabled(false);
-            AnotherConcurrentGUI.this.downButton.setEnabled(false);
-            AnotherConcurrentGUI.this.upButton.setEnabled(false);
+            AnotherConcurrentGUI.this.disableButton();
         }
 
     }
@@ -106,11 +104,14 @@ public class AnotherConcurrentGUI extends JFrame {
                     e.printStackTrace();
                 } 
             }
-            AnotherConcurrentGUI.this.stopBtn.setEnabled(false);
-            AnotherConcurrentGUI.this.downButton.setEnabled(false);
-            AnotherConcurrentGUI.this.upButton.setEnabled(false);
+            AnotherConcurrentGUI.this.disableButton();
         }
 
     }
 
+    private void disableButton() {
+        this.stopBtn.setEnabled(false);
+        this.downButton.setEnabled(false);
+        this.upButton.setEnabled(false);
+    }
 }
