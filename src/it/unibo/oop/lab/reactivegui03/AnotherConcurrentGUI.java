@@ -22,7 +22,7 @@ public class AnotherConcurrentGUI extends JFrame {
     private final JButton downButton = new JButton("DOWN");
     private final JButton stopBtn = new JButton("Stop");
     private final JLabel countLabel = new JLabel("");
-    private boolean stop = false;
+    private boolean stop;
 
 
     public AnotherConcurrentGUI() {
@@ -31,7 +31,7 @@ public class AnotherConcurrentGUI extends JFrame {
         final JPanel panel = new JPanel();
         this.setSize((int) (screenDim.getWidth() * WIDTH_PERC), (int) (screenDim.getHeight() * HEIGHT_PERC));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        this.stop = false;
         panel.add(countLabel);
         panel.add(downButton);
         panel.add(upButton);
