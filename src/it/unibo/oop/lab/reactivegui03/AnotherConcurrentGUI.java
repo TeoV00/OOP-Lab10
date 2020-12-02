@@ -22,6 +22,7 @@ public class AnotherConcurrentGUI extends JFrame {
     private final JButton downButton = new JButton("DOWN");
     private final JButton stopBtn = new JButton("Stop");
     private final JLabel countLabel = new JLabel("");
+    private boolean stop = false;
 
 
     public AnotherConcurrentGUI() {
@@ -54,14 +55,18 @@ public class AnotherConcurrentGUI extends JFrame {
 
         @Override
         public void run() {
-            for (int time = 0; time < 10; time++) {
-                try {
-                    Thread.sleep(1000);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
+            long startTime = System.currentTimeMillis();
+            long oldTime;
+            for (int time = 0; time < 10;) {
+                oldTime = System.currentTimeMillis();
+                if (oldTime - startTime >= 1000) {
+                    time++;
+                    startTime = oldTime;
+                    System.out.println(time);
                 }
             }
-
+            System.out.println("10 second expired");
+            AnotherConcurrentGUI.this.stop = true;
             AnotherConcurrentGUI.this.stopBtn.setEnabled(false);
             AnotherConcurrentGUI.this.downButton.setEnabled(false);
             AnotherConcurrentGUI.this.upButton.setEnabled(false);
@@ -72,11 +77,10 @@ public class AnotherConcurrentGUI extends JFrame {
     private class Agent implements Runnable {
 
         private boolean upDown = true;
-        private boolean stop = false;
         private int counter = 0;
 
         public void stopCounting() {
-            this.stop = true;
+            AnotherConcurrentGUI.this.stop = true;
         }
 
         public void setDownCount() {
